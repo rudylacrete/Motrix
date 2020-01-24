@@ -4,7 +4,7 @@
     <ul>
       <li
         @click="() => nav('basic')"
-        :class="[ current === 'basic' ? 'active' : '' ]"
+        :class="[['/preference/basic', '/preference'].includes(current) ? 'active' : '' ]"
         >
         <i class="subnav-icon">
           <mo-icon name='preference-basic' width="20" height="20" />
@@ -13,7 +13,7 @@
       </li>
       <li
         @click="() => nav('advanced')"
-        :class="[ current === 'advanced' ? 'active' : '' ]"
+        :class="[ current === '/preference/advanced' ? 'active' : '' ]"
         >
         <i class="subnav-icon">
           <mo-icon name='preference-advanced' width="20" height="20" />
@@ -22,7 +22,7 @@
       </li>
       <li
         @click="() => nav('lab')"
-        :class="[ current === 'lab' ? 'active' : '' ]"
+        :class="[ current === '/preference/lab' ? 'active' : '' ]"
         >
         <i class="subnav-icon">
           <mo-icon name='preference-lab' width="20" height="20" />
@@ -41,14 +41,13 @@
   export default {
     name: 'mo-preference-subnav',
     props: {
-      current: {
-        type: String,
-        default: 'basic'
-      }
     },
     computed: {
       title: function () {
         return this.$t('subnav.preferences')
+      },
+      current: function () {
+        return this.$store.state.route.path
       }
     },
     methods: {

@@ -32,33 +32,21 @@ export default new Router({
           children: [
             {
               path: 'basic',
-              alias: '',
+              alias: '/',
               components: {
-                subnav: require('@/components/Subnav/PreferenceSubnav').default,
                 form: require('@/components/Preference/Basic').default
-              },
-              props: {
-                subnav: { current: 'basic' }
               }
             },
             {
               path: 'advanced',
               components: {
-                subnav: require('@/components/Subnav/PreferenceSubnav').default,
                 form: require('@/components/Preference/Advanced').default
-              },
-              props: {
-                subnav: { current: 'advanced' }
               }
             },
             {
               path: 'lab',
               components: {
-                subnav: require('@/components/Subnav/PreferenceSubnav').default,
                 form: require('@/components/Preference/Lab').default
-              },
-              props: {
-                subnav: { current: 'lab' }
               }
             }
           ]

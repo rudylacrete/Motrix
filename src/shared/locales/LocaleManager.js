@@ -6,7 +6,7 @@ export default class LocaleManager {
     this.options = options
 
     i18next.init({
-      fallbackLng: 'en-US',
+      fallbackLng: 'fr-FR',
       resources: options.resources
     })
   }

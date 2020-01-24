@@ -3,7 +3,6 @@ import is from 'electron-is'
 import { resolve } from 'path'
 import { existsSync, lstatSync } from 'fs'
 import logger from '../core/Logger'
-import engineBinMap from '../configs/engine'
 
 export function getLogPath () {
   return logger.transports.file.file
@@ -24,11 +23,6 @@ export function getUserDataPath () {
 
 export function getUserDownloadsPath () {
   return app.getPath('downloads')
-}
-
-export function getEngineBin (platform) {
-  let result = engineBinMap.hasOwnProperty(platform) ? engineBinMap[platform] : ''
-  return result
 }
 
 export function transformConfig (config) {

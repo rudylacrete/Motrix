@@ -5,27 +5,19 @@
       :showActions="showWindowActions"
     />
     <router-view />
-    <mo-engine-client
-      :secret="rpcSecret"
-    />
-    <mo-ipc v-if="isRenderer()" />
   </div>
 </template>
 
 <script>
   import is from 'electron-is'
   import TitleBar from '@/components/Native/TitleBar'
-  import EngineClient from '@/components/Native/EngineClient'
-  import Ipc from '@/components/Native/Ipc'
   import { mapState } from 'vuex'
   import { getLangDirection } from '@shared/utils'
 
   export default {
     name: 'Motrix',
     components: {
-      [TitleBar.name]: TitleBar,
-      [EngineClient.name]: EngineClient,
-      [Ipc.name]: Ipc
+      [TitleBar.name]: TitleBar
     },
     computed: {
       ...mapState('app', {

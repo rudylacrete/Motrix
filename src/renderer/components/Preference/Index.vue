@@ -1,18 +1,20 @@
 <template>
   <el-container class="content panel" direction="horizontal">
     <el-aside width="200px" class="subnav">
-      <router-view name="subnav" />
+      <mo-preference-subnav />
     </el-aside>
     <router-view name="form" />
   </el-container>
 </template>
 
 <script>
+  import Subnav from '@/components/Subnav/PreferenceSubnav'
   export default {
     name: 'mo-content-preference',
-    computed: {
-    },
     components: {
+      [Subnav.name]: Subnav
+    },
+    computed: {
     },
     methods: {
     }

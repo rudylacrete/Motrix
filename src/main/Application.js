@@ -7,7 +7,6 @@ import { extname, basename } from 'path'
 import logger from './core/Logger'
 import ConfigManager from './core/ConfigManager'
 import { setupLocaleManager } from '@/ui/Locale'
-import Engine from './core/Engine'
 import AutoLaunchManager from './core/AutoLaunchManager'
 import UpdateManager from './core/UpdateManager'
 import EnergyManager from './core/EnergyManager'
@@ -40,12 +39,6 @@ export default class Application extends EventEmitter {
 
     this.initWindowManager()
 
-    this.engine = new Engine({
-      systemConfig: this.configManager.getSystemConfig(),
-      userConfig: this.configManager.getUserConfig()
-    })
-    this.startEngine()
-
     this.trayManager = new TrayManager()
 
     this.autoLaunchManager = new AutoLaunchManager()
@@ -61,23 +54,6 @@ export default class Application extends EventEmitter {
     this.handleCommands()
 
     this.handleIpcMessages()
-  }
-
-  startEngine () {
-    try {
-      this.engine.start()
-    } catch (err) {
-      const { message } = err
-      dialog.showMessageBox({
-        type: 'error',
-        title: this.i18n.t('app.system-error-title'),
-        message: this.i18n.t('app.system-error-message', { message })
-      }, () => {
-        setTimeout(() => {
-          app.quit()
-        }, 100)
-      })
-    }
   }
 
   initWindowManager () {
@@ -150,7 +126,6 @@ export default class Application extends EventEmitter {
   }
 
   stop () {
-    this.engine.stop()
     this.energyManager.stopPowerSaveBlocker()
     this.trayManager.destroy()
   }
@@ -294,13 +269,6 @@ export default class Application extends EventEmitter {
     this.stop()
     app.relaunch()
     app.exit()
-    // this.closePage(page)
-    // if (page === 'index') {
-    //   this.engine.restart()
-    // }
-    // setTimeout(() => {
-    //   this.showPage(page)
-    // }, 500)
   }
 
   handleCommands () {

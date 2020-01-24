@@ -7,60 +7,8 @@
  */
 export const availableLanguages = [
   {
-    value: 'ca',
-    label: 'Català'
-  },
-  {
-    value: 'de',
-    label: 'Deutsch'
-  },
-  {
-    value: 'en-US',
-    label: 'English'
-  },
-  {
-    value: 'es',
-    label: 'Español'
-  },
-  {
-    value: 'fa',
-    label: 'فارسی'
-  },
-  {
     value: 'fr',
     label: 'Français'
-  },
-  {
-    value: 'ja',
-    label: '日本語'
-  },
-  {
-    value: 'ko',
-    label: '한국어'
-  },
-  {
-    value: 'pt-BR',
-    label: 'Português (Brasil)'
-  },
-  {
-    value: 'ru',
-    label: 'Русский'
-  },
-  {
-    value: 'tr',
-    label: 'Türkçe'
-  },
-  {
-    value: 'zh-CN',
-    label: '简体中文'
-  },
-  {
-    value: 'zh-TW',
-    label: '繁體中文'
-  },
-  {
-    value: 'uk',
-    label: 'Українська'
   }
 ]
 
