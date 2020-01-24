@@ -4,8 +4,8 @@ export default {
   index: {
     attrs: {
       title: 'Motrix',
-      width: 1024,
-      height: 768,
+      width: 862,
+      height: 588,
       minWidth: 400,
       minHeight: 420,
       // backgroundColor: '#FFFFFF',

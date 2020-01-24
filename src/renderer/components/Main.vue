@@ -6,7 +6,6 @@
     <mo-add-task :visible="addTaskVisible" :type="addTaskType" />
     <mo-about-panel :visible="aboutPanelVisible" />
     <mo-task-item-info :visible="taskItemInfoVisible" :task="currentTaskItem" />
-    <mo-dragger />
   </el-container>
 </template>
 
@@ -17,7 +16,6 @@
   import Speedometer from '@/components/Speedometer/Speedometer'
   import AddTask from '@/components/Task/AddTask'
   import TaskItemInfo from '@/components/Task/TaskItemInfo'
-  import Dragger from '@/components/Dragger/Index'
 
   export default {
     name: 'mo-main',
@@ -26,8 +24,7 @@
       [Aside.name]: Aside,
       [Speedometer.name]: Speedometer,
       [AddTask.name]: AddTask,
-      [TaskItemInfo.name]: TaskItemInfo,
-      [Dragger.name]: Dragger
+      [TaskItemInfo.name]: TaskItemInfo
     },
     computed: {
       ...mapState('app', {
