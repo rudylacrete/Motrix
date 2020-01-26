@@ -57,6 +57,10 @@
     beforeMount: function () {
       this.updateRootClassName()
     },
+    mounted () {
+      // hide cursor
+      document.body.style.cursor = 'none'
+    },
     watch: {
       themeClass: function (val, oldVal) {
         this.updateRootClassName()
