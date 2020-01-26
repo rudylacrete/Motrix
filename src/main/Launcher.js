@@ -11,6 +11,7 @@ import {
   parseArgvAsFile
 } from './utils'
 import { EMPTY_STRING } from '@shared/constants'
+import ObdEngine from './core/ObdEngine'
 
 export default class Launcher extends EventEmitter {
   constructor () {
@@ -61,6 +62,9 @@ export default class Launcher extends EventEmitter {
     logger.warn('openedAtLogin===>', this.openedAtLogin)
 
     this.handleAppEvents()
+
+    this.obdEngine = new ObdEngine()
+    this.obdEngine.init()
   }
 
   handleAppEvents () {
@@ -160,6 +164,12 @@ export default class Launcher extends EventEmitter {
       const { openedAtLogin } = this
       global.application.start('index', {
         openedAtLogin
+      })
+
+      // send all obd data to renderer processes
+      this.obdEngine.on('data', (data) => {
+        console.log('LAUNCHER: Get data from ODB')
+        global.application.sendMessageToAll('obd:data', data)
       })
 
       global.application.on('ready', () => {

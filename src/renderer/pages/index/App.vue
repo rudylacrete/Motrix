@@ -58,8 +58,10 @@
       this.updateRootClassName()
     },
     mounted () {
-      // hide cursor
-      document.body.style.cursor = 'none'
+      if (!is.dev()) {
+        // hide cursor
+        document.body.style.cursor = 'none'
+      }
     },
     watch: {
       themeClass: function (val, oldVal) {

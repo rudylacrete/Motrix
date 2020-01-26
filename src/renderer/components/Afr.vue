@@ -71,20 +71,22 @@
     computed: {
     },
     methods: {
+      handleOdbData (_, data) {
+        if (data && data.PID === 'AFR' && data.value) {
+          // make a copy of the data
+          let oldData = this.series[0].data.slice()
+          if (oldData.length > 20) oldData = oldData.slice(-19)
+          oldData.push(data.value)
+          this.series[0].data = oldData
+          this.$refs.chart.updateSeries(this.series)
+        }
+      }
     },
     mounted () {
-      const self = this
-      this._thread = setInterval(() => {
-        // make a copy of the data
-        let data = self.series[0].data.slice()
-        if (data.length > 20) data = data.slice(-19)
-        data.push(14)
-        self.series[0].data = data
-        self.$refs.chart.updateSeries(self.series)
-      }, 1000)
+      this.$electron.ipcRenderer.on('obd:data', this.handleOdbData)
     },
     destroyed () {
-      if (this._thread) clearInterval(this._thread)
+      this.$electron.ipcRenderer.off('obd:data', this.handleOdbData)
     }
   }
 </script>
