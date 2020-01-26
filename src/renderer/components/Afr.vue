@@ -21,7 +21,8 @@
           chart: {
             id: 'vuechart-example',
             type: 'line',
-            toolbar: { show: false }
+            toolbar: { show: false },
+            animations: { dynamicAnimation: false }
           },
           stroke: {
             curve: 'smooth'
