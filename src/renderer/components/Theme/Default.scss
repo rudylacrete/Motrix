@@ -44,6 +44,11 @@ img {
   @include clearfix();
 }
 
+@font-face {
+  font-family: 'digit';
+  src: url('~@/assets/font/Digit.ttf');
+}
+
 /* Element UI
 -------------------------- */
 .el-progress-bar__inner {

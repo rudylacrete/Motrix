@@ -49,7 +49,7 @@
     methods: {
       isRenderer: is.renderer,
       updateRootClassName: function () {
-        const { themeClass = '', i18nClass = '', dirClass = '' } = this
+        const { themeClass = 'theme-light', i18nClass = 'i18n-fr', dirClass = 'dir-ltr' } = this
         const className = `${themeClass} ${i18nClass} ${dirClass}`
         document.documentElement.className = className
       }

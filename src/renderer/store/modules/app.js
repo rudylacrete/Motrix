@@ -1,9 +1,7 @@
-import is from 'electron-is'
 import api from '@/api'
 import { getSystemTheme } from '@/components/Native/utils'
 
 const BASE_INTERVAL = 1000
-const PER_INTERVAL = 100
 const MIN_INTERVAL = 500
 const MAX_INTERVAL = 6000
 
@@ -101,43 +99,10 @@ const actions = {
   hideAboutPanel ({ commit }) {
     commit('CHANGE_ABOUT_PANEL_VISIBLE', false)
   },
-  fetchEngineInfo ({ commit }) {
+  fetchEngineInfoRemove ({ commit }) {
     api.getVersion()
       .then((data) => {
         commit('UPDATE_ENGINE_INFO', data)
-      })
-  },
-  fetchEngineOptions ({ commit }) {
-    return new Promise((resolve) => {
-      api.getGlobalOption()
-        .then((data) => {
-          commit('UPDATE_ENGINE_OPTIONS', data)
-          resolve(data)
-        })
-    })
-  },
-  fetchGlobalStat ({ commit, dispatch }) {
-    api.getGlobalStat()
-      .then((data) => {
-        const stat = {}
-        Object.keys(data).forEach((key) => {
-          stat[key] = Number(data[key])
-        })
-
-        const { numActive } = stat
-        if (numActive > 0) {
-          const interval = BASE_INTERVAL - PER_INTERVAL * numActive
-          dispatch('updateInterval', interval)
-        } else {
-          // fix downloadSpeed when numActive = 0
-          stat.downloadSpeed = 0
-          dispatch('increaseInterval')
-        }
-        commit('UPDATE_GLOBAL_STAT', stat)
-
-        if (is.renderer()) {
-          dispatch('togglePowerSaveBlocker', numActive)
-        }
       })
   },
   togglePowerSaveBlocker (_, numActive) {

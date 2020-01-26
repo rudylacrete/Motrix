@@ -2,7 +2,29 @@
   <el-container id="afr" class="bg-techno full-screen">
       <el-header>AFR page</el-header>
       <el-main>
-        <apexchart ref="chart" width="500" :options="options" :series="series"></apexchart>
+        <el-row>
+          <el-col :span="16">
+            <apexchart ref="chart" class="line-chart" :options="options" :series="series"></apexchart>
+          </el-col>
+          <el-col :span="8">
+            <el-container>
+              <el-main>
+                <div class="digit-counter">
+                  <h1>CURRENT</h1>
+                  <div class="value">{{currentValue}}</div>
+                </div>
+                <div class="digit-counter">
+                  <h1>MIN</h1>
+                  <div class="value">{{min}}</div>
+                </div>
+                <div class="digit-counter">
+                  <h1>MAX</h1>
+                  <div class="value">{{max}}</div>
+                </div>
+              </el-main>
+            </el-container>
+          </el-col>
+        </el-row>
       </el-main>
   </el-container>
 </template>
@@ -65,7 +87,11 @@
         series: [{
           name: 'AFR',
           data: [14.7, 11.6, 11.7, 12, 13.6, 11, 14.7, 14.7]
-        }]
+        }],
+
+        min: 0,
+        max: 0,
+        currentValue: 0
       }
     },
     computed: {
@@ -77,6 +103,13 @@
           let oldData = this.series[0].data.slice()
           if (oldData.length > 20) oldData = oldData.slice(-19)
           oldData.push(data.value)
+          this.currentValue = data.value
+          if (this.min === 0 || this.currentValue < this.min) {
+            this.min = this.currentValue
+          }
+          if (this.currentValue > this.max) {
+            this.max = this.currentValue
+          }
           this.series[0].data = oldData
           this.$refs.chart.updateSeries(this.series)
         }
@@ -92,4 +125,14 @@
 </script>
 
 <style lang="scss">
+  .digit-counter {
+    flex-shrink: 0;
+  }
+  .digit-counter h1 {
+    margin: 0;
+  }
+  .digit-counter .value {
+    font-family: 'digit';
+    font-size: 500%;
+  }
 </style>

@@ -8,6 +8,6 @@ export default class ObdEngine extends EventEmitter {
         PID: 'AFR',
         value: Math.round((11 + Math.random() * 4) * 100) / 100
       })
-    }, 1000)
+    }, 500)
   }
 }
