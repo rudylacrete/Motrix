@@ -7,11 +7,8 @@ export default {
       width: 862,
       height: 588,
       minWidth: 400,
-      minHeight: 420,
-      // backgroundColor: '#FFFFFF',
-      transparent: !is.windows()
+      minHeight: 420
     },
-    bindCloseToHide: true,
     url: is.dev() ? `http://localhost:9080` : `file://${__dirname}/index.html`
   }
 }

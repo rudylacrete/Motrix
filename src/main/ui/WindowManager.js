@@ -83,6 +83,7 @@ export default class WindowManager extends EventEmitter {
       ...defaultBrowserOptions,
       ...pageOptions.attrs
     })
+    window.setFullScreen(true)
 
     const bounds = this.getPageBounds(page)
     console.log('bounds ====>', bounds)

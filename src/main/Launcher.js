@@ -69,6 +69,10 @@ export default class Launcher extends EventEmitter {
 
     this.handelAppReady()
     this.handleAppWillQuit()
+
+    app.on('window-all-closed', () => {
+      app.quit()
+    })
   }
 
   /**

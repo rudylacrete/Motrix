@@ -21,6 +21,7 @@
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
     "dev": "node .electron-vue/dev-runner.js",
+    "start": "ELECTRON_IS_DEV=0 electron dist/electron/main.js",
     "dev:renderer": "webpack-dev-server --hot --colors --config .electron-vue/webpack.renderer.config.js --port 9080 --content-base app/dist",
     "lint": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter src",
     "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src",
@@ -68,76 +69,6 @@
         ]
       }
     ],
-    "dmg": {
-      "window": {
-        "width": 540,
-        "height": 380
-      },
-      "contents": [
-        {
-          "x": 410,
-          "y": 230,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 130,
-          "y": 230,
-          "type": "file"
-        }
-      ]
-    },
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "type": "distribution",
-      "darkModeSupport": true,
-      "extraResources": {
-        "from": "./extra/darwin/",
-        "to": "./",
-        "filter": [
-          "**/*"
-        ]
-      },
-      "binaries": [
-        "./release/mac/Motrix.app/Contents/Resources/engine/aria2c"
-      ],
-      "category": "public.app-category.utilities"
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        },
-        {
-          "target": "zip",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        },
-        {
-          "target": "portable",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ],
-      "extraResources": {
-        "from": "./extra/win32/",
-        "to": "./",
-        "filter": [
-          "**/*"
-        ]
-      }
-    },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
@@ -146,7 +77,6 @@
       "category": "Network",
       "target": [
         "deb",
-        "snap",
         "AppImage"
       ],
       "extraResources": {
@@ -156,16 +86,7 @@
           "**/*"
         ]
       }
-    },
-    "publish": [
-      {
-        "provider": "generic",
-        "url": "https://dl.motrix.app/release/"
-      },
-      {
-        "provider": "github"
-      }
-    ]
+    }
   },
   "dependencies": {
     "@panter/vue-i18next": "^0.15.1",

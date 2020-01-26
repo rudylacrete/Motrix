@@ -14,7 +14,6 @@ import ProtocolManager from './core/ProtocolManager'
 import WindowManager from './ui/WindowManager'
 import MenuManager from './ui/MenuManager'
 import TouchBarManager from './ui/TouchBarManager'
-import TrayManager from './ui/TrayManager'
 import ThemeManager from './ui/ThemeManager'
 import { AUTO_CHECK_UPDATE_INTERVAL } from '@shared/constants'
 
@@ -38,8 +37,6 @@ export default class Application extends EventEmitter {
     this.initTouchBarManager()
 
     this.initWindowManager()
-
-    this.trayManager = new TrayManager()
 
     this.autoLaunchManager = new AutoLaunchManager()
 
@@ -127,7 +124,6 @@ export default class Application extends EventEmitter {
 
   stop () {
     this.energyManager.stopPowerSaveBlocker()
-    this.trayManager.destroy()
   }
 
   sendCommand (command, ...args) {
@@ -156,7 +152,6 @@ export default class Application extends EventEmitter {
   initThemeManager () {
     this.themeManager = new ThemeManager()
     this.themeManager.on('system-theme-changed', (theme) => {
-      this.trayManager.changeIconTheme(theme)
       this.sendCommandToAll('application:system-theme', theme)
     })
   }
@@ -235,7 +230,6 @@ export default class Application extends EventEmitter {
   handleUpdaterEvents () {
     this.updateManager.on('checking', (event) => {
       this.menuManager.updateMenuItemEnabledState('app.check-for-updates', false)
-      this.trayManager.updateMenuItemEnabledState('app.check-for-updates', false)
     })
 
     this.updateManager.on('download-progress', (event) => {
@@ -245,12 +239,10 @@ export default class Application extends EventEmitter {
 
     this.updateManager.on('update-not-available', (event) => {
       this.menuManager.updateMenuItemEnabledState('app.check-for-updates', true)
-      this.trayManager.updateMenuItemEnabledState('app.check-for-updates', true)
     })
 
     this.updateManager.on('update-downloaded', (event) => {
       this.menuManager.updateMenuItemEnabledState('app.check-for-updates', true)
-      this.trayManager.updateMenuItemEnabledState('app.check-for-updates', true)
       const win = this.windowManager.getWindow('index')
       win.setProgressBar(0)
     })
@@ -261,7 +253,6 @@ export default class Application extends EventEmitter {
 
     this.updateManager.on('update-error', (event) => {
       this.menuManager.updateMenuItemEnabledState('app.check-for-updates', true)
-      this.trayManager.updateMenuItemEnabledState('app.check-for-updates', true)
     })
   }
 
@@ -321,7 +312,6 @@ export default class Application extends EventEmitter {
       this.localeManager.changeLanguageByLocale(locale)
         .then(() => {
           this.menuManager.setup(locale)
-          this.trayManager.setup(locale)
         })
     })
 
@@ -385,11 +375,6 @@ export default class Application extends EventEmitter {
 
     ipcMain.on('update-menu-states', (event, visibleStates, enabledStates, checkedStates) => {
       this.menuManager.updateMenuStates(visibleStates, enabledStates, checkedStates)
-      this.trayManager.updateMenuStates(visibleStates, enabledStates, checkedStates)
-    })
-
-    ipcMain.on('download-status-change', (event, status) => {
-      this.trayManager.updateStatus(status)
     })
   }
 }
