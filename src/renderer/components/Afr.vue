@@ -1,6 +1,5 @@
 <template>
   <el-container id="afr" class="bg-techno full-screen">
-      <el-header>AFR page</el-header>
       <el-main>
         <el-row>
           <el-col :span="16">
@@ -52,6 +51,9 @@
           yaxis: {
             min: 9,
             max: 15
+          },
+          xaxis: {
+            labels: { show: false }
           },
           annotations: { yaxis: [
             {
