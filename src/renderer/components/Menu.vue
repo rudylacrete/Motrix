@@ -1,5 +1,5 @@
 <template>
-  <el-container id="menu">
+  <el-container id="menu" class="bg-car full-screen">
     <el-row class="menu-container">
       <el-col v-for="menu in menuList" :key="menu.name" class="menu-el" :span="6">
         <div class="container">

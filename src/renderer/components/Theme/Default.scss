@@ -136,11 +136,20 @@ img {
   margin-top: 36px;
 }
 
-#menu {
+.bg-car {
   background-image: url('~@/assets/background/car.jpg');
   background-size: cover;
 }
 
+.bg-techno {
+  // background-image: url('~@/assets/background/bg-techno.png');
+  background-size: cover;
+}
+
+.full-screen {
+  height: 100%;
+  margin-top: 36px;
+}
 
 .draggable {
   -webkit-app-region: drag;

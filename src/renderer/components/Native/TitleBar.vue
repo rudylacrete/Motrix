@@ -2,6 +2,9 @@
   <div class="title-bar">
     <div class="title-bar-dragger"></div>
     <ul v-if="showActions" class="window-actions">
+      <li @click="nav('/')">
+        <mo-icon name="menu-task" width="12" height="12" />
+      </li>
       <li @click="handleMinimize">
         <mo-icon name="win-minimize" width="12" height="12" />
       </li>
@@ -19,6 +22,7 @@
   import '@/components/Icons/win-minimize'
   import '@/components/Icons/win-maximize'
   import '@/components/Icons/win-close'
+  import '@/components/Icons/menu-task'
 
   export default {
     name: 'mo-title-bar',
@@ -45,6 +49,11 @@
       },
       handleClose: function () {
         this.win.close()
+      },
+      nav (page) {
+        this.$router.push({
+          path: page
+        })
       }
     }
   }

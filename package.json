@@ -169,6 +169,7 @@
   },
   "dependencies": {
     "@panter/vue-i18next": "^0.15.1",
+    "apexcharts": "^3.15.3",
     "aria2": "^4.0.3",
     "axios": "^0.19.0",
     "blob-util": "^2.0.2",
@@ -188,6 +189,7 @@
     "svg-innerhtml": "^1.1.0",
     "utf-8-validate": "^5.0.2",
     "vue": "^2.6.10",
+    "vue-apexcharts": "^1.5.2",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.6",
     "vuex": "^3.1.1",
