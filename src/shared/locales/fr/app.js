@@ -1,4 +1,6 @@
 export default {
+  'obd-loading': 'En attente de connexion OBD',
+
   'task-list': 'Liste des tâches',
   'add-task': 'Ajouter une tâche',
   'about': 'À Propos de Motrix',

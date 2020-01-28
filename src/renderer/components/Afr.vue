@@ -1,30 +1,31 @@
 <template>
   <el-container id="afr" class="bg-techno full-screen">
-      <el-main>
-        <el-row>
-          <el-col :span="16">
-            <apexchart ref="chart" class="line-chart" :options="options" :series="series"></apexchart>
-          </el-col>
-          <el-col :span="8">
-            <el-container>
-              <el-main>
-                <div class="digit-counter">
-                  <h1>CURRENT</h1>
-                  <div class="value">{{currentValue}}</div>
-                </div>
-                <div class="digit-counter">
-                  <h1>MIN</h1>
-                  <div class="value">{{min}}</div>
-                </div>
-                <div class="digit-counter">
-                  <h1>MAX</h1>
-                  <div class="value">{{max}}</div>
-                </div>
-              </el-main>
-            </el-container>
-          </el-col>
-        </el-row>
-      </el-main>
+    <mo-obd-loading />
+    <el-main>
+      <el-row>
+        <el-col :span="16">
+          <apexchart ref="chart" class="line-chart" :options="options" :series="series"></apexchart>
+        </el-col>
+        <el-col :span="8">
+          <el-container>
+            <el-main>
+              <div class="digit-counter">
+                <h1>CURRENT</h1>
+                <div class="value">{{currentValue}}</div>
+              </div>
+              <div class="digit-counter">
+                <h1>MIN</h1>
+                <div class="value">{{min}}</div>
+              </div>
+              <div class="digit-counter">
+                <h1>MAX</h1>
+                <div class="value">{{max}}</div>
+              </div>
+            </el-main>
+          </el-container>
+        </el-col>
+      </el-row>
+    </el-main>
   </el-container>
 </template>
 

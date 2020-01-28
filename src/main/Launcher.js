@@ -168,7 +168,6 @@ export default class Launcher extends EventEmitter {
 
       // send all obd data to renderer processes
       this.obdEngine.on('data', (data) => {
-        console.log('LAUNCHER: Get data from ODB')
         global.application.sendMessageToAll('obd:data', data)
       })
 

@@ -9,9 +9,11 @@ import 'svg-innerhtml'
 import App from './App'
 import router from '@/router'
 import store from '@/store'
+import obdManager from '@/api/ObdManager'
 import { getLocaleManager } from '@/components/Locale'
 import Icon from '@/components/Icons/Icon'
 import Msg from '@/components/Msg'
+import ObdLoading from '@/components/ObdLoading'
 
 import '@/components/Theme/Index.scss'
 
@@ -36,11 +38,10 @@ function init (config) {
   Vue.use(Msg, Message, {
     showClose: true
   })
+  Vue.use(Loading)
+  // register global component to wait for obd connection in pages
+  Vue.component(ObdLoading.name, ObdLoading)
 
-  const loading = Loading.service({
-    fullscreen: true,
-    background: 'rgba(0, 0, 0, 0.1)'
-  })
   Vue.component('mo-icon', Icon)
 
   sync(store, router)
@@ -54,9 +55,10 @@ function init (config) {
     template: '<App/>'
   }).$mount('#app')
 
-  setTimeout(() => {
-    loading.close()
-  }, 400)
+  // expose obdManager globally for debug purposes
+  window.obdManager = obdManager
+  // init OBD manager
+  obdManager.init(store)
 }
 
 store.dispatch('preference/fetchPreference')
